@@ -1,0 +1,25 @@
+@model SportsPro.Models.Registration
+
+@{
+    ViewBag.Title = "Registrations - Details";
+}
+
+<h1>Registration Details</h1>
+<hr />
+
+<div>
+    <h4>Registration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Registration ID</dt>
+        <dd>@Model.RegistrationID</dd>
+        <dt>Customer</dt>
+        <dd>@Model.Customer?.FullName</dd>
+        <dt>Product</dt>
+        <dd>@Model.Product?.Name</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RegistrationID" class="btn btn-primary">Edit</a> |
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

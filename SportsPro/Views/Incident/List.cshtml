@@ -1,0 +1,80 @@
+@model IEnumerable<SportsPro.Models.Incident>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Incident Manager";
+
+    // Retrieve current action name from RouteData
+    var currentAction = ViewContext.RouteData.Values["action"] as string;
+}
+
+<h2>Incident Manager</h2>
+
+<!-- Filter links (Bootstrap Pills) -->
+<ul class="nav nav-pills mb-3">
+    <!-- All incidents -->
+    <li class="nav-item">
+        <a class="text-primary nav-link @(currentAction == "List" ? "active" : "")"
+           asp-action="List" asp-controller="Incident">
+            All incidents
+        </a>
+    </li>
+    <!-- Unassigned incidents -->
+    <li class="nav-item">
+        <a class="text-primary nav-link @(currentAction == "Unassigned" ? "active" : "")"
+           asp-action="Unassigned" asp-controller="Incident">
+            Unassigned incidents
+        </a>
+    </li>
+    <!-- Open incidents -->
+    <li class="nav-item">
+        <a class="text-primary nav-link @(currentAction == "Open" ? "active" : "")"
+           asp-action="Open" asp-controller="Incident">
+            Open incidents
+        </a>
+    </li>
+</ul>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Date Opened</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var inc in Model)
+            {
+                <tr>
+                    <td>@inc.Title</td>
+                    <td>@inc.Customer?.FullName</td>
+                    <td>@inc.Product?.Name</td>
+                    <td>@inc.DateOpened.ToShortDateString()</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@inc.IncidentID" class="btn btn-primary">
+                            Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@inc.IncidentID" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No incidents found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success">Add Incident</a>

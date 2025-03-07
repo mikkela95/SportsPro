@@ -1,0 +1,24 @@
+@model SportsPro.Models.Product
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Product Details</h2>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-2">@Html.DisplayNameFor(m => m.ProductCode)</dt>
+    <dd class="col-sm-10">@Model.ProductCode</dd>
+
+    <dt class="col-sm-2">@Html.DisplayNameFor(m => m.Name)</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">@Html.DisplayNameFor(m => m.YearlyPrice)</dt>
+    <dd class="col-sm-10">@Model.YearlyPrice.ToString("C")</dd>
+
+    <dt class="col-sm-2">@Html.DisplayNameFor(m => m.ReleaseDate)</dt>
+    <dd class="col-sm-10">@Model.ReleaseDate.ToShortDateString()</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

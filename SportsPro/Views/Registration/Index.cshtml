@@ -1,0 +1,43 @@
+@model IEnumerable<SportsPro.Models.Registration>
+
+@{
+    ViewBag.Title = "Registrations - Index";
+}
+
+<h1>Registrations</h1>
+<hr />
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Registration</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Registration ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th></th>
+               <th></th>
+                  <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reg in Model)
+        {
+            <tr>
+                <td>@reg.RegistrationID</td>
+                <td>@reg.Customer?.FullName</td>
+                <td>@reg.Product?.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@reg.RegistrationID" class="btn btn-primary">Edit</a> 
+                          </td>
+                    <td>
+                       <a asp-action="Details" asp-route-id="@reg.RegistrationID" class="btn btn-secondary">Details</a> 
+                       </td>
+                    <td>      <a asp-action="Delete" asp-route-id="@reg.RegistrationID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

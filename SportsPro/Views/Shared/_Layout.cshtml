@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SportsPro</title>
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+    .nav-pills .nav-link {
+        color: rgba(255, 255, 255, 0.7);
+        transition: color 0.3s ease-in-out;
+    }
+
+    .nav-pills .nav-link.active {
+        color: #ffffff !important;
+        font-weight: bold;
+    }
+</style>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">SportsPro</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="nav nav-pills">
+                        @{
+                            var currentController = ViewContext.RouteData.Values["Controller"]?.ToString() ?? "";
+                            var currentAction = ViewContext.RouteData.Values["Action"]?.ToString() ?? "";
+                        }
+
+                        <a class="nav-item nav-link @(currentController == "Home" && currentAction == "Index" ? "active" : "")" 
+                           asp-controller="Home" asp-action="Index">Home</a>
+
+                        <a class="nav-item nav-link @(currentController == "Product" && currentAction == "Index" ? "active" : "")" 
+                           asp-controller="Product" asp-action="Index">Products</a>
+
+                        <a class="nav-item nav-link @(currentController == "Technician" && currentAction == "List" ? "active" : "")" 
+                           asp-controller="Technician" asp-action="List">Technicians</a>
+
+                        <a class="nav-item text-red nav-link @(currentController == "Customer" && currentAction == "List" ? "active" : "")" 
+                           asp-controller="Customer" asp-action="List">Customers</a>
+
+                        <a class="nav-item nav-link @(currentController == "Incident" && currentAction == "List" ? "active" : "")" 
+                           asp-controller="Incident" asp-action="List">Incidents</a>
+
+                        <a class="nav-item nav-link @(currentController == "Registration" && currentAction == "Index" ? "active" : "")" 
+                           asp-controller="Registration" asp-action="Index">Registrations</a>
+
+       
+                    </div>
+
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-item nav-link @(currentController == "Home" && currentAction == "About" ? "active" : "")" 
+                           asp-controller="Home" asp-action="About">About</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-3 pb-3">
+        <div class="container">&copy; @DateTime.Now.Year - SportsPro</div>
+    </footer>
+
+    <script src="~/jquery.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
